@@ -6,7 +6,7 @@ pipeline {
         stage('Build ConfigServer') {
             steps {
                 // Get code from your GitHub repository and the ConfigServer folder
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + '/Sprng-Devops.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops/Sprng-Devops.git']]])
                 dir('ConfigServer') {
                     // Run Maven on a Unix agent.
                     sh "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -46,7 +46,7 @@ pipeline {
         }
         stage('Build registryService') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + '/Sprng-Devops.git' ]]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url:'https://github.com/woodjooe/Sprng-Devops/Sprng-Devops.git' ]]])
                  dir('registryService') {
             sh "mvn clean package -DskipTests"
             }
@@ -79,7 +79,7 @@ pipeline {
         }
         stage('Build Gateway-service') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + '/Sprng-Devops.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops/Sprng-Devops.git']]])
                 dir('Gateway-service') {
                     sh "mvn -Dmaven.test.failure.ignore=true clean package"
                 }
@@ -113,7 +113,7 @@ pipeline {
         }
         stage('Build Evenement-service') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + '/Sprng-Devops.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops/Sprng-Devops.git']]])
                 dir('Evenement-service') {
                     sh "mvn clean package -DskipTests"
                 }
@@ -147,7 +147,7 @@ pipeline {
         }
         stage('Build Outil-service') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + '/Sprng-Devops.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops/Sprng-Devops.git']]])
                 dir('Outil-service') {
                     sh "mvn clean package -DskipTests"
                 }
@@ -182,7 +182,7 @@ pipeline {
         }
         stage('Build Publication-service') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + '/Sprng-Devops.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops/Sprng-Devops.git']]])
                 dir('Publication-service') {
                     sh "mvn clean package -DskipTests"
                 }
@@ -216,7 +216,7 @@ pipeline {
         }
         stage('Build Membre-service') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + '/Sprng-Devops.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops/Sprng-Devops.git']]])
                 dir('Membre-service') {
                     sh "mvn clean package -DskipTests"
                 }
