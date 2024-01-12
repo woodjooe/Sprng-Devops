@@ -112,7 +112,7 @@ pipeline {
         }
         stage('Build Evenement-service') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + /springProject.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + '/springProject.git']]])
                 dir('Evenement-service') {
                     sh "mvn clean package -DskipTests"
                 }
@@ -146,7 +146,7 @@ pipeline {
         }
         stage('Build Outil-service') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + /springProject.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + '/springProject.git']]])
                 dir('Outil-service') {
                     sh "mvn clean package -DskipTests"
                 }
