@@ -1,6 +1,7 @@
+def GithubUrl = 'https://github.com/woodjooe/Sprng-Devops'
+
 pipeline {
     agent any
-    GithubUrl = 'https://github.com/woodjooe/Sprng-Devops'
     stages {
         stage('Build ConfigServer') {
             steps {
