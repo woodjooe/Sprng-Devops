@@ -22,6 +22,100 @@ pipeline {
                 }
             }
         }
+        stage('Build registryService') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url:'https://github.com/woodjooe/Sprng-Devops.git' ]]])
+                 dir('registryService') {
+            sh "mvn clean package -DskipTests"
+            }
+        }
+                post {
+                    success {
+                    archiveArtifacts 'registryService/target/*.jar'
+                    }
+                }
+        }
+
+
+        stage('Build Gateway-service') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops.git']]])
+                dir('Gateway-service') {
+                    sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                }
+            }
+
+            post {
+                success {
+                    junit '**/Gateway-service/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'Gateway-service/target/*.jar'
+                }
+            }
+        }
+
+        stage('Build Evenement-service') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops.git']]])
+                dir('Evenement-service') {
+                    sh "mvn clean package -DskipTests"
+                }
+            }
+
+            post {
+                success {
+                    
+                    archiveArtifacts 'Evenement-service/target/*.jar'
+                }
+            }
+        }
+
+        stage('Build Outil-service') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops.git']]])
+                dir('Outil-service') {
+                    sh "mvn clean package -DskipTests"
+                }
+            }
+
+            post {
+                success {
+                    
+                    archiveArtifacts 'Outil-service/target/*.jar'
+                }
+            }
+        }
+
+        stage('Build Publication-service') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops.git']]])
+                dir('Publication-service') {
+                    sh "mvn clean package -DskipTests"
+                }
+            }
+
+            post {
+                success {
+                    
+                    archiveArtifacts 'Publication-service/target/*.jar'
+                }
+            }
+        }
+
+        stage('Build Membre-service') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops.git']]])
+                dir('Membre-service') {
+                    sh "mvn clean package -DskipTests"
+                }
+            }
+
+            post {
+                success {
+                    
+                    archiveArtifacts 'Membre-service/target/*.jar'
+                }
+            }
+        }
         
         stage('Build and Push Docker Image ConfigServer') {
             steps {
@@ -44,20 +138,10 @@ pipeline {
             }
         
         }
-        stage('Build registryService') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url:'https://github.com/woodjooe/Sprng-Devops.git' ]]])
-                 dir('registryService') {
-            sh "mvn clean package -DskipTests"
-            }
-        }
+        
 
-    post {
-        success {
-            archiveArtifacts 'registryService/target/*.jar'
-        }
-            }
-        }
+
+        
         stage('Build and Push Docker Image registryService') {
             steps {
                 dir('registryService') {
@@ -77,21 +161,7 @@ pipeline {
             }
         
         }
-        stage('Build Gateway-service') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops.git']]])
-                dir('Gateway-service') {
-                    sh "mvn -Dmaven.test.failure.ignore=true clean package"
-                }
-            }
 
-            post {
-                success {
-                    junit '**/Gateway-service/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'Gateway-service/target/*.jar'
-                }
-            }
-        }
         stage('Build and Push Docker Image Gateway-service') {
             steps {
                 dir('Gateway-service') {
@@ -111,21 +181,7 @@ pipeline {
             }
         
         }
-        stage('Build Evenement-service') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops.git']]])
-                dir('Evenement-service') {
-                    sh "mvn clean package -DskipTests"
-                }
-            }
-
-            post {
-                success {
-                    
-                    archiveArtifacts 'Evenement-service/target/*.jar'
-                }
-            }
-        }
+        
         stage('Build and Push Docker Image Evenement-service') {
             steps {
                 dir('Evenement-service') {
@@ -145,21 +201,7 @@ pipeline {
             }
         
         }
-        stage('Build Outil-service') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops.git']]])
-                dir('Outil-service') {
-                    sh "mvn clean package -DskipTests"
-                }
-            }
-
-            post {
-                success {
-                    
-                    archiveArtifacts 'Outil-service/target/*.jar'
-                }
-            }
-        }
+        
         stage('Build and Push Docker Image Outil-service') {
             steps {
                 dir('Outil-service') {
@@ -180,21 +222,7 @@ pipeline {
             }
         
         }
-        stage('Build Publication-service') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops.git']]])
-                dir('Publication-service') {
-                    sh "mvn clean package -DskipTests"
-                }
-            }
-
-            post {
-                success {
-                    
-                    archiveArtifacts 'Publication-service/target/*.jar'
-                }
-            }
-        }
+        
         stage('Build and Push Docker Image Publication-service') {
             steps {
                 dir('Publication-service') {
@@ -214,21 +242,7 @@ pipeline {
             }
         
         }
-        stage('Build Membre-service') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/woodjooe/Sprng-Devops.git']]])
-                dir('Membre-service') {
-                    sh "mvn clean package -DskipTests"
-                }
-            }
-
-            post {
-                success {
-                    
-                    archiveArtifacts 'Membre-service/target/*.jar'
-                }
-            }
-        }
+        
         stage('Build and Push Docker Image Membre-service') {
             steps {
                 dir('Membre-service') {
