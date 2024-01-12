@@ -1,18 +1,11 @@
 pipeline {
     agent any
-
-    tools {
-        // Use the installed Maven version
-        maven "MAVEN"
-        jdk "JDK"
-       
-    }
-
+    def GithubUrl = 'https://github.com/woodjooe/Sprng-Devops'
     stages {
         stage('Build ConfigServer') {
             steps {
                 // Get code from your GitHub repository and the ConfigServer folder
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/youssefboutaleb/springProject.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + '/springProject.git']]])
                 dir('ConfigServer') {
                     // Run Maven on a Unix agent.
                     sh "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -34,17 +27,17 @@ pipeline {
                 dir('ConfigServer') {
                     // Build Docker image
                     script {
-                        sh 'docker build -t youssefboutaleb/devops2023:config-server-latest .'
+                        sh 'docker build -t ' + GithubUrl + ':config-server-latest .'
                         
                     }
 
                     // Push Docker image
                     script {
-                         sh 'docker login -u youssefboutaleb -p ******'
-                         sh 'docker push youssefboutaleb/devops2023:config-server-latest'
+                         sh 'docker login -u woodjooe -p ******'
+                         sh 'docker push woodjooe/Sprng-Devops:config-server-latest'
                           // Run a command inside the Docker container
                        
-                        sh 'docker run -d --net host youssefboutaleb/devops2023:config-server-latest'
+                        sh 'docker run -d --net host woodjooe/Sprng-Devops:config-server-latest'
                     }
                 }
             }
@@ -52,7 +45,7 @@ pipeline {
         }
         stage('Build registryService') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/youssefboutaleb/springProject.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + '/springProject.git' ]]])
                  dir('registryService') {
             sh "mvn clean package -DskipTests"
             }
@@ -69,15 +62,15 @@ pipeline {
                 dir('registryService') {
                     // Build Docker image
                     script {
-                        sh 'docker build -t youssefboutaleb/devops2023:registry-service-latest .'
+                        sh 'docker build -t woodjooe/Sprng-Devops:registry-service-latest .'
                         
                     }
 
                     // Push Docker image
                     script {
                          
-                         sh 'docker push youssefboutaleb/devops2023:registry-service-latest'
-                         sh 'docker run -d youssefboutaleb/devops2023:registry-service-latest'
+                         sh 'docker push woodjooe/Sprng-Devops:registry-service-latest'
+                         sh 'docker run -d woodjooe/Sprng-Devops:registry-service-latest'
                     }
                 }
             }
@@ -85,7 +78,7 @@ pipeline {
         }
         stage('Build Gateway-service') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/youssefboutaleb/springProject.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + '/springProject.git']]])
                 dir('Gateway-service') {
                     sh "mvn -Dmaven.test.failure.ignore=true clean package"
                 }
@@ -103,15 +96,15 @@ pipeline {
                 dir('Gateway-service') {
                     // Build Docker image
                     script {
-                        sh 'docker build -t youssefboutaleb/devops2023:gateway-service-latest .'
+                        sh 'docker build -t woodjooe/Sprng-Devops:gateway-service-latest .'
                         
                     }
 
                     // Push Docker image
                     script {
                        
-                         sh 'docker push youssefboutaleb/devops2023:gateway-service-latest'
-                         sh 'docker run -d youssefboutaleb/devops2023:gateway-service-latest'
+                         sh 'docker push woodjooe/Sprng-Devops:gateway-service-latest'
+                         sh 'docker run -d woodjooe/Sprng-Devops:gateway-service-latest'
                     }
                 }
             }
@@ -119,7 +112,7 @@ pipeline {
         }
         stage('Build Evenement-service') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/youssefboutaleb/springProject.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + /springProject.git']]])
                 dir('Evenement-service') {
                     sh "mvn clean package -DskipTests"
                 }
@@ -137,15 +130,15 @@ pipeline {
                 dir('Evenement-service') {
                     // Build Docker image
                     script {
-                        sh 'docker build -t youssefboutaleb/devops2023:evenement-service-latest .'
+                        sh 'docker build -t woodjooe/Sprng-Devops:evenement-service-latest .'
                         
                     }
 
                     // Push Docker image
                     script {
                          
-                         sh 'docker push youssefboutaleb/devops2023:evenement-service-latest'
-                         sh 'docker run -d youssefboutaleb/devops2023:evenement-service-latest'
+                         sh 'docker push woodjooe/Sprng-Devops:evenement-service-latest'
+                         sh 'docker run -d woodjooe/Sprng-Devops:evenement-service-latest'
                     }
                 }
             }
@@ -153,7 +146,7 @@ pipeline {
         }
         stage('Build Outil-service') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/youssefboutaleb/springProject.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + /springProject.git']]])
                 dir('Outil-service') {
                     sh "mvn clean package -DskipTests"
                 }
@@ -171,7 +164,7 @@ pipeline {
                 dir('Outil-service') {
                     // Build Docker image
                     script {
-                        sh 'docker build -t youssefboutaleb/devops2023:outil-service-latest .'
+                        sh 'docker build -t woodjooe/Sprng-Devops:outil-service-latest .'
                         
                         
                     }
@@ -179,8 +172,8 @@ pipeline {
                     // Push Docker image
                     script {
                          
-                         sh 'docker push youssefboutaleb/devops2023:outil-service-latest'
-                         sh 'docker run -d youssefboutaleb/devops2023:outil-service-latest'
+                         sh 'docker push woodjooe/Sprng-Devops:outil-service-latest'
+                         sh 'docker run -d woodjooe/Sprng-Devops:outil-service-latest'
                     }
                 }
             }
@@ -188,7 +181,7 @@ pipeline {
         }
         stage('Build Publication-service') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/youssefboutaleb/springProject.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + '/springProject.git']]])
                 dir('Publication-service') {
                     sh "mvn clean package -DskipTests"
                 }
@@ -206,15 +199,15 @@ pipeline {
                 dir('Publication-service') {
                     // Build Docker image
                     script {
-                        sh 'docker build -t youssefboutaleb/devops2023:publication-service-latest .'
+                        sh 'docker build -t woodjooe/Sprng-Devops:publication-service-latest .'
                         
                     }
 
                     // Push Docker image
                     script {
                          
-                         sh 'docker push youssefboutaleb/devops2023:publication-service-latest'
-                         sh 'docker run -d youssefboutaleb/devops2023:publication-service-latest'
+                         sh 'docker push woodjooe/Sprng-Devops:publication-service-latest'
+                         sh 'docker run -d woodjooe/Sprng-Devops:publication-service-latest'
                     }
                 }
             }
@@ -222,7 +215,7 @@ pipeline {
         }
         stage('Build Membre-service') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/youssefboutaleb/springProject.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: GithubUrl + '/springProject.git']]])
                 dir('Membre-service') {
                     sh "mvn clean package -DskipTests"
                 }
@@ -240,15 +233,15 @@ pipeline {
                 dir('Membre-service') {
                     // Build Docker image
                     script {
-                        sh 'docker build -t youssefboutaleb/devops2023:membre-service-latest .'
+                        sh 'docker build -t woodjooe/Sprng-Devops:membre-service-latest .'
                         
                     }
 
                     // Push Docker image
                     script {
                          
-                         sh 'docker push youssefboutaleb/devops2023:membre-service-latest'
-                         sh 'docker run -d youssefboutaleb/devops2023:membre-service-latest'
+                         sh 'docker push woodjooe/Sprng-Devops:membre-service-latest'
+                         sh 'docker run -d woodjooe/Sprng-Devops:membre-service-latest'
                     }
                 }
             }
