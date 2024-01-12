@@ -28,17 +28,17 @@ pipeline {
                 dir('ConfigServer') {
                     // Build Docker image
                     script {
-                        sh 'docker build -t ' + GithubUrl + ':config-server-latest .'
+                        sh 'docker build -t oinkoink/sprng-devops:config-server-latest .'
                         
                     }
 
                     // Push Docker image
                     script {
-                         sh 'docker login -u woodjooe -p ******'
-                         sh 'docker push woodjooe/Sprng-Devops:config-server-latest'
+                         sh 'docker login -u oinkoink -p OinkerOinker'
+                         sh 'docker push oinkoink/sprng-devops:config-server-latest'
                           // Run a command inside the Docker container
                        
-                        sh 'docker run -d --net host woodjooe/Sprng-Devops:config-server-latest'
+                        sh 'docker run -d --net host oinkoink/sprng-devops:config-server-latest'
                     }
                 }
             }
@@ -63,15 +63,15 @@ pipeline {
                 dir('registryService') {
                     // Build Docker image
                     script {
-                        sh 'docker build -t woodjooe/Sprng-Devops:registry-service-latest .'
+                        sh 'docker build -t oinkoink/sprng-devops:registry-service-latest .'
                         
                     }
 
                     // Push Docker image
                     script {
                          
-                         sh 'docker push woodjooe/Sprng-Devops:registry-service-latest'
-                         sh 'docker run -d woodjooe/Sprng-Devops:registry-service-latest'
+                         sh 'docker push oinkoink/sprng-devops:registry-service-latest'
+                         sh 'docker run -d oinkoink/sprng-devops:registry-service-latest'
                     }
                 }
             }
@@ -97,15 +97,15 @@ pipeline {
                 dir('Gateway-service') {
                     // Build Docker image
                     script {
-                        sh 'docker build -t woodjooe/Sprng-Devops:gateway-service-latest .'
+                        sh 'docker build -t oinkoink/sprng-devops:gateway-service-latest .'
                         
                     }
 
                     // Push Docker image
                     script {
                        
-                         sh 'docker push woodjooe/Sprng-Devops:gateway-service-latest'
-                         sh 'docker run -d woodjooe/Sprng-Devops:gateway-service-latest'
+                         sh 'docker push oinkoink/sprng-devops:gateway-service-latest'
+                         sh 'docker run -d oinkoink/sprng-devops:gateway-service-latest'
                     }
                 }
             }
@@ -131,15 +131,15 @@ pipeline {
                 dir('Evenement-service') {
                     // Build Docker image
                     script {
-                        sh 'docker build -t woodjooe/Sprng-Devops:evenement-service-latest .'
+                        sh 'docker build -t oinkoink/sprng-devops:evenement-service-latest .'
                         
                     }
 
                     // Push Docker image
                     script {
                          
-                         sh 'docker push woodjooe/Sprng-Devops:evenement-service-latest'
-                         sh 'docker run -d woodjooe/Sprng-Devops:evenement-service-latest'
+                         sh 'docker push oinkoink/sprng-devops:evenement-service-latest'
+                         sh 'docker run -d oinkoink/sprng-devops:evenement-service-latest'
                     }
                 }
             }
@@ -165,7 +165,7 @@ pipeline {
                 dir('Outil-service') {
                     // Build Docker image
                     script {
-                        sh 'docker build -t woodjooe/Sprng-Devops:outil-service-latest .'
+                        sh 'docker build -t oinkoink/sprng-devops:outil-service-latest .'
                         
                         
                     }
@@ -173,8 +173,8 @@ pipeline {
                     // Push Docker image
                     script {
                          
-                         sh 'docker push woodjooe/Sprng-Devops:outil-service-latest'
-                         sh 'docker run -d woodjooe/Sprng-Devops:outil-service-latest'
+                         sh 'docker push oinkoink/sprng-devops:outil-service-latest'
+                         sh 'docker run -d oinkoink/sprng-devops:outil-service-latest'
                     }
                 }
             }
@@ -200,15 +200,15 @@ pipeline {
                 dir('Publication-service') {
                     // Build Docker image
                     script {
-                        sh 'docker build -t woodjooe/Sprng-Devops:publication-service-latest .'
+                        sh 'docker build -t oinkoink/sprng-devops:publication-service-latest .'
                         
                     }
 
                     // Push Docker image
                     script {
                          
-                         sh 'docker push woodjooe/Sprng-Devops:publication-service-latest'
-                         sh 'docker run -d woodjooe/Sprng-Devops:publication-service-latest'
+                         sh 'docker push oinkoink/sprng-devops:publication-service-latest'
+                         sh 'docker run -d oinkoink/sprng-devops:publication-service-latest'
                     }
                 }
             }
@@ -234,15 +234,15 @@ pipeline {
                 dir('Membre-service') {
                     // Build Docker image
                     script {
-                        sh 'docker build -t woodjooe/Sprng-Devops:membre-service-latest .'
+                        sh 'docker build -t oinkoink/sprng-devops:membre-service-latest .'
                         
                     }
 
                     // Push Docker image
                     script {
                          
-                         sh 'docker push woodjooe/Sprng-Devops:membre-service-latest'
-                         sh 'docker run -d woodjooe/Sprng-Devops:membre-service-latest'
+                         sh 'docker push oinkoink/sprng-devops:membre-service-latest'
+                         sh 'docker run -d oinkoink/sprng-devops:membre-service-latest'
                     }
                 }
             }
